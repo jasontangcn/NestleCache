@@ -41,7 +41,7 @@
 五、多级缓存，而不仅仅是用户添加对象(基本Done)
     包含的问题：In Memory--->Local File System--->DB System
     
-六、分布式的实现
+六、分布式的实现(Partial)
     
 
 
