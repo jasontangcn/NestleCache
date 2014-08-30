@@ -1,0 +1,56 @@
+#############################################################
+#                   NestleCache configuration               #
+#############################################################
+cache_names=default
+
+#cache_synchronized_strategy=none
+#cache_synchronized_strategy=read
+cache_synchronized_strategy=write
+#cache_synchronized_strategy=application_level
+
+control_size_of_object_cached=true
+#unit is byte. 
+maximal_size_of_object_cached=500
+###################################################################
+#when objectcached reache the rate of cache maximal,              #
+#it's considered out of size,and will not be put into the cache.  #
+###################################################################
+objectcached_outofsize_rate=0.95
+
+#means_of_calculating_size_of_object_cached=reflect
+#means_of_calculating_size_of_object_cached=implement_cacheable
+means_of_calculating_size_of_object_cached=self_help
+
+
+control_size_of_cache=true
+#unit is byte.
+maximal_size_of_cache=1000000
+cache_overload_rate=0.90
+
+control_capability_of_cache=true
+maximal_capability=2000
+
+##########################################################################################################
+#It's not suggested to change it if you don't have special requierment.                                  #
+#hashmap_initial_capability's default value is equal to the maximal_capability setting.                  #
+#hashmap_loadfactor's default value is equal to 100%.                                                    #
+#hashmap_accessOrder's default value is true and LRLU strategy is used,otherwise FIFO strategy is used.  #
+##########################################################################################################
+customize_hashmap=false
+#hashmap_initial_capability=  
+#hashmap_loadfactor=
+#hashmap_accessOrder=
+
+#unit is ms.If it is less than or equal to 0,the objectcached is considered not expired forever.
+expired_time=0
+use_softreference=true
+#unit is ms.
+clearup_expired_objects_daemonthread_sleeptime=5000
+
+support_interface_fetching_objectcached=false
+impl_class_fetching_object_cached=
+
+support_null_key=true
+support_null_value=true
+
+

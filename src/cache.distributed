@@ -1,0 +1,81 @@
+                     #############################################################
+                     #                   NestleCache configuration               #
+                     #############################################################
+
+
+cache_names=distributedA,distributedB
+
+###############################################################
+#                   Config distributed caches.                #
+###############################################################
+cache_properties_string=UDP(mcast_addr=228.8.8.8;mcast_port=45566;ip_ttl=32;mcast_send_buf_size=150000;mcast_recv_buf_size=80000):\
+                        PING(timeout=2000;num_initial_members=3):\
+                        MERGE2(min_interval=5000;max_interval=10000):\
+                        FD_SOCK:\
+                        VERIFY_SUSPECT(timeout=1500):\
+                        pbcast.NAKACK(gc_lag=50;retransmit_timeout=300,600,1200,2400,4800):\
+                        UNICAST(timeout=5000):\
+                        pbcast.STABLE(desired_avg_gossip=20000):\
+                        FRAG(frag_size=4096;down_thread=false;up_thread=false):\
+                        pbcast.GMS(join_timeout=5000;join_retry_timeout=2000;shun=false;print_local_addr=true):\
+                        pbcast.STATE_TRANSFER
+#channel_factory_class=
+cache_persistent=false
+#unit is ms.
+state_timout=1000
+
+
+#cache_synchronized_strategy=none
+cache_synchronized_strategy=write
+#cache_synchronized_strategy=read
+#cache_synchronized_strategy=application_level
+
+
+control_size_of_objectcached=true
+################
+#unit is byte. #
+################
+maximal_size_of_objectcached=500
+###################################################################
+#when objectcached reache the rate of cache maximal,              #
+#it's considered out of size,and will not be put into the cache.  #
+###################################################################
+objectcached_outofsize_rate=0.97
+
+
+#means_of_calculating_size_of_object_cached=reflect
+#means_of_calculating_size_of_object_cached=implement_cacheable
+means_of_calculating_size_of_object_cached=self_help
+
+
+control_size_of_cache=true
+#unit is byte.
+maximal_size_of_cache=2000*500
+cache_overload_rate=0.90;
+
+control_capability_of_cache=true
+maximal_capability=2000
+
+##########################################################################################################
+#It's not suggested to change it if you don't have special requierment.                                  #
+#hashmap_initial_capability's default value is equal to the maximal_capability setting.                  #
+#hashmap_loadfactor's default value is equal to 100%.                                                    #
+#hashmap_accessOrder's default value is true and LRLU strategy is used,otherwise FIFO strategy is used.  #
+##########################################################################################################
+customize_hashmap=false
+#hashmap_initial_capability=  
+#hashmap_loadfactor=
+#hashmap_accessOrder=
+
+#unit is ms.If it is less than or equal to 0,the objectcached is considered not expired forever.
+expired_time=0
+use_softreference=true
+#unit is ms.
+clearup_expired_objects_daemonthread_sleeptime=5000
+
+support_interface_fetching_objectcached=false
+
+support_null_key=true;
+support_null_value=true;
+
+
